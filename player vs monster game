@@ -1,0 +1,78 @@
+var Character = {
+    //initialize the player character
+    intilizeCharacter: function(name,health,force){
+        this.name = name
+        this.health = health
+        this.force = force
+    },
+    //Attact a target
+    attack: function(target){
+        if(this.health > 0){
+            var damage = this.force
+            console.log(`${this.name} attacks ${target.name} and causes ${damage} damage points`)
+            target.health = target.health - damage
+            if(target.health > 0){
+                console.log(`${target.name} has ${target.health} health points left `)
+            } else {
+                console.log(`${target.name} has been eliminated`)
+            }
+        }else {
+            console.log(`${this.name} can't attack (they've been eliminated)`)
+        }
+    }
+}
+
+var Player = Object.create(Character)
+//Initialize the player
+//Above function is a Character and here we are creating a seperate function Player that contains Xp in addition to all the other details
+Player.intilizePlayer = function(name,health,force){
+    this.intilizeCharacter(name,health,force)
+    this.xp = 0 
+}
+//describe the player
+Player.describe = function(){
+    var description = `${this.name} has ${this.health} health points, ${this.force} force points and ${this.xp} experience points `
+    return description
+}
+//Fight an enemy
+Player.fight = function(enemy){
+    this.attack(enemy)
+    if(enemy.health <= 0){
+        console.log(`${this.name} eliminate ${enemy.name}  and wins ${enemy.value} experience points`)
+        this.xp += enemy.value
+    }
+}
+
+var Enemy = Object.create(Character)
+//Initialise the enemy
+Enemy.intilizeEnemy = function(name,health,force,species,value){
+    this.intilizeCharacter(name,health,force)
+    this.species = species
+    this.value = value
+}
+
+//Game Starts
+
+var playerOne = Object.create(Player)
+playerOne.intilizePlayer("Rainbow Dash",150,25)
+
+var playerTwo = Object.create(Player)
+playerTwo.intilizePlayer("Apple Jack",130,35)
+
+console.log(`Welcome to the adventure! Here are our Heros: `)
+console.log(playerOne.describe())
+console.log(playerTwo.describe())
+
+var monster = Object.create(Enemy)
+monster.intilizeEnemy("Spike",40,20,"Orc",10)
+
+console.log(`A wild monster has appeared : ${monster.name}`)
+
+monster.attack(playerOne)
+monster.attack(playerTwo)
+
+playerOne.fight(monster)
+playerTwo.fight(monster)
+
+console.log(playerOne.describe())
+console.log(playerTwo.describe())
