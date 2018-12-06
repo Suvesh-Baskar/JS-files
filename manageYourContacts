@@ -1,0 +1,48 @@
+//Array containing all the contacts
+var contactArray = []
+
+//Sample Contacts
+var firstName = "John"
+var lastName = "Smith"
+contactArray.push([firstName,lastName])
+var firstName = "Jane"
+var lastName = "Doe"
+contactArray.push([firstName,lastName])
+
+//Options to choose for User
+console.log(`Welcome to your contacts manager!`)
+console.log('1: List Contacts')
+console.log('2: Add a contact')
+console.log('0: Quit')
+
+//getting user Input
+var userInput = prompt("Enter Your Choice")
+
+//Untill the user presses 0 the loop will continue
+while(userInput != 0){
+
+    //if user click 1 it will log all the contacts into the console
+    if(userInput == 1){
+        console.log("Here's the list of all your contacts: ")
+        contactArray.forEach((index) => {
+            console.log(`Last Name : ${index[1]}, First Name : ${index[0]}`)
+        })
+    }
+
+    //if user clicks 2 it will prompt the User to enter the First Name and Last Name to be added to the contacts
+    if(userInput == 2){
+        console.log("Adding the contacts")
+        firstName = prompt("Enter the First Name")
+        lastName = prompt("Enter the Last Name")
+        contactArray.push([firstName,lastName])
+    }
+
+    //Again ask the user to select an option
+    console.log('1: List Contacts')
+    console.log('2: Add a contact')
+    console.log('0: Quit')
+    userInput = prompt("Enter Your Choice")
+}
+
+//if user clicks 0 it breaks from loop and greets the User
+console.log("Thanks for using our service")
