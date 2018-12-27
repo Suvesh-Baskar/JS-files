@@ -1,0 +1,74 @@
+// class User {
+//   constructor(email,name){
+//     this.email = email;
+//     this.name = name;
+//     this.score = 0;
+//   }
+//   login(){
+//     console.log(this.name," just logged in");
+//     return this;
+//   }
+//   logout(){
+//     console.log(this.name," just logged out");
+//     return this;
+//   }
+//   updateScore(){
+//     this.score++;
+//     console.log(this.name,"Score is now",this.score);
+//     return this;
+//   }
+//
+// }
+//
+// class Admin extends User {
+//   deleteUser(user){
+//     users = users.filter(val => val.email != user.email);
+//   }
+// }
+
+function User(email,name){
+  this.email = email;
+  this.name = name;
+  this.status = false;
+}
+
+User.prototype.login = function(){
+  this.status = true;
+  console.log(this.name,"has logged in");
+}
+
+User.prototype.logout = function(){
+  this.status = false;
+  console.log(this.name,"has logged out");
+}
+
+function Admin(...args){
+  User.apply(this,args);
+  this.role = "super admin";
+}
+
+Admin.prototype = Object.create(User.prototype);
+
+Admin.prototype.deleteUser = function(user){
+  users = users.filter( value => value.email != user.email );
+}
+
+var userOne = new User("ryu@roninwraith.com","ryu");
+var userTwo = new User("yoshi$roninwraith.com","yoshi");
+var userAdmin = new Admin("admin@roninwraith.corp","admin");
+
+var users = [userOne,userTwo,userAdmin]
+// console.log(userOne);
+// console.log(userTwo);
+
+// userOne.login();
+// userTwo.logout();
+
+// userOne.login().updateScore().updateScore().logout();
+
+// userAdmin.login().deleteUser(userTwo);
+
+// console.log(users);
+
+// console.log(userOne);
+// userTwo.login();
