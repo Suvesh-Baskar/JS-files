@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js" charset="utf-8"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+		<title>Chart JS</title>
+	</head>
+	<body>
+		<div class="container">
+			<canvas id="myChart"></canvas>
+		</div>
+
+		<script>
+			let myChart = document.getElementById('myChart').getContext('2d');
+
+			// Global options
+			Chart.defaults.global.defaultFontFamily = 'Lato';
+			Chart.defaults.global.defaultFontSize = 18;
+			Chart.defaults.global.defaultFontColor = '#777';
+
+
+
+			let massPopChart = new Chart(myChart,{
+				type:'line',// bar, horizontal bar,pie,line,doughnut,radar,polar
+				data:{
+					labels: ['Boston','Worcester','Springfield','Lowell','Cambridege','New Bedford'],
+					datasets: [{
+						label:'Population',
+						data:[
+							617594,
+							181045,
+							153060,
+							106519,
+							105162,
+							95072
+						],
+						// backgroundColor: 'green'
+						backgroundColor:[
+							'rgba(255,99,132,0.6)',
+							'rgba(54,162,235,0.6)',
+							'rgba(255,206,86,0.6)',
+							'rgba(75,192,192,0.6)',
+							'rgba(153,102,255,0.6)',
+							'rgba(255,159,64,0.6)',
+							'rgba(255,99,132,0.6)'
+						],
+						borderWidth: 1,
+						borderColor: '#777',
+						hoverBorderWidth: 3,
+						hoverBorderColor: 'black'
+					}]
+				},
+				options:{
+					title:{
+						display: true,
+						text: 'Largest Populated Cities in Massachusetts',
+						fontSize: 25
+					},
+					legend:{
+						display:true,
+						position: 'right',
+						labels:{
+							fontColor: 'black'
+						}
+					},
+					layout:{
+						padding:{
+							left:0,
+							rigth:0,
+							top:0,
+							bottom:0
+						}
+					},
+					tooltips:{
+						enabled: true
+					}
+				}
+			});
+		</script>
+	</body>
+</html>
